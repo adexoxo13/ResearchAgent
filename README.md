@@ -131,14 +131,6 @@ docker run -p 5000:5000 --rm \
     transition: transform 0.8s ease;
   }
   
-  @keyframes slideHorizontal {
-    0%, 100% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(20px);
-    }
-  }
 
   .image-pair {
     display: flex;
@@ -167,8 +159,8 @@ docker run -p 5000:5000 --rm \
 
 2. Upon successful authentication, you'll be redirected to the research dashboard (`/app`)
 <div class="image-pair">
-  <img src="images/2a.png" alt="Night Mode" style="animation: slideLeft 1s ease-out; style="width: 40%;">
-  <img src="images/2b.png" alt="Day Mode" style="animation: slideRight 1s ease-out;style="width: 40%;">
+  <img src="images/2a.png" alt="Night Mode" style="animation: slideLeft 1s ease-out; width: 40%; height: 40%">
+  <img src="images/2b.png" alt="Day Mode" style="animation: slideRight 1s ease-out;width: 40%; height: 40%">
 </div>
 
 3. From the dashboard, you can:
