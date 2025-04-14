@@ -159,18 +159,19 @@ docker run -p 5000:5000 --rm \
 
 2. Upon successful authentication, you'll be redirected to the research dashboard (`/app`)
 <div class="image-pair">
-  <img src="images/2a.png" alt="Night Mode" style="animation: slideLeft 1s ease-out; width: 40%; height: 40%">
-  <img src="images/2b.png" alt="Day Mode" style="animation: slideRight 1s ease-out;width: 40%; height: 40%">
+  <img src="images/2a.png" alt="Night Mode" style="animation: slideLeft 1s ease-out; width: 40%; height: 80%">
+  <img src="images/2b.png" alt="Day Mode" style="animation: slideRight 1s ease-out;width: 40%; height: 80%">
 </div>
 
 3. From the dashboard, you can:
    - Perform web searches
    - Query Wikipedia
    - Save research findings
-<div class="image-pair">
-  <img src="images/3a.png" alt="Day Query" style="animation: float 4s ease-in-out infinite; style="width: 40%;">
-  <img src="images/3b.png" alt="Night Query" style="animation: float 4s ease-in-out infinite 2s; style="width: 40%;">
+<div style="display: flex; gap: 20px; padding: 10px; margin: 40px 10px; justify-content: center;">
+  <img src="images/3a.png" alt="Query Page day mode" style="width: 30%; height: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+  <img src="images/3b.png" alt="Query Page night mode" style="width: 30%; height: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
 </div>
+
 
 ## Authentication System
 
