@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Research Assistant</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+</head>
+<body>
+
+  <button id="themeToggle" class="theme-btn">🌓</button>
+
+  <div class="container">
+    <h1>🔍 AI Research Assistant</h1>
+    <div class="chat-container">
+      <div id="conversation" class="conversation">
+        <div class="welcome-msg">
+          <h2>Welcome to AI Researcher!</h2>
+          <p>Start by entering a research topic below</p>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input type="text" id="queryInput" placeholder="Enter research topic..." autocomplete="off">
+        <button id="queryButton">Research</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Animation -->
+  <div id="loading" class="loading-container">
+    <img src="/static/loading.svg" alt="Loading...">
+  </div>
+
+  <script>
+    // ========== TOKEN HANDLING ========== //
+    // Extract token from URL or session storage
+    const urlParams = new URLSearchParams(window.location.search);
+    let tokenFromServer = "{{ token }}"; // Server-rendered token from Flask
+    let authToken = tokenFromServer && tokenFromServer !== 'None' ? tokenFromServer : sessionStorage.getItem('researchToken');
+
+    // Authentication checks
+    if (!authToken) {
+      window.location.href = '/login'; // Redirect unauthenticated users
+    } else {
+      sessionStorage.setItem('researchToken', authToken); // Persist valid token
+      if (window.location.search.includes('token')) {
+        window.history.replaceState({}, document.title, "/"); // Clean URL
+      }
+    }
+
+    // ========== THEME MANAGEMENT ========== //
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    document.body.classList.toggle('dark-mode', isDarkMode); // Apply saved theme
+
+    // Theme toggle button handler
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const newDarkMode = !document.body.classList.contains('dark-mode');
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', newDarkMode); // Save theme preference
+    });
+
+    // ========== MARKDOWN RENDERING ========== //
+    marked.setOptions({
+      highlight: function(code, lang) { // Syntax highlighting configuration
+        return hljs.highlightAuto(code).value; // Use highlight.js
+      }
+    });
+
+    // ========== AUTH-ENABLED FETCH ========== //
+    const originalFetch = window.fetch;
+    window.fetch = async (url, options = {}) => { // Fetch wrapper
+      options.headers = { // Inject auth token
+        ...options.headers,
+        'Authorization': `Bearer ${authToken}`
+      };
+      const response = await originalFetch(url, options);
+      if (response.status === 401) { // Handle expired/invalid tokens
+        sessionStorage.removeItem('researchToken');
+        window.location.href = '/login';
+      }
+      return response;
+    };
+
+    // ========== RESEARCH HANDLERS ========== //
+    async function handleQuery() {
+      const input = document.getElementById('queryInput');
+      const query = input.value.trim();
+      if (!query) return;
+      
+      // UI Cleanup
+      input.value = '';
+      input.blur(); // Remove keyboard focus
+
+      showLoading();
+      addMessage(query, 'user'); // Show user message
+
+      try {
+        // API Request
+        const response = await fetch('/research', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query })
+        });
+
+        // Handle Response
+        const result = await response.json();
+        addMessage(result, 'agent'); // Show agent response
+
+      } catch (error) {
+        addMessage(`Error: ${error.message}`, 'error');
+      } finally {
+        hideLoading();
+        scrollToBottom(); // Maintain chat visibility
+      }
+    }
+
+    // ========== MESSAGE MANAGEMENT ========== //
+    function addMessage(content, type = 'user') {
+      const conversation = document.getElementById('conversation');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `${type}-msg`; // CSS class based on message type
+      messageDiv.innerHTML = type === 'user' 
+        ? `You: ${content}` 
+        : formatResearchResult(content); // Special formatting for agent
+      conversation.appendChild(messageDiv);
+    }
+
+    // ========== RESULT FORMATTING ========== //
+    function formatResearchResult(result) {
+      const sourcesList = (result.sources || []).map(s => `
+        <li>
+            <a href="${s}" target="_blank" rel="noopener noreferrer">
+                ${s.replace(/^https?:\/\//, '')}  <!-- Safe URL display -->
+            </a>
+        </li>
+      `).join('');
+
+      return `
+        <div class="agent-msg">
+            <div class="header">
+                <h3>${result.topic}</h3>
+                <small>Processed in ${result.processing_time}s</small>
+            </div>
+            <div class="content">${result.summary}</div>
+            <div class="sources">
+                <h4>Sources:</h4>
+                <ul>${sourcesList}</ul>
+            </div>
+            <a href="${result.download_link}" class="download-link" download>
+                📥 Download Full Report
+            </a>
+        </div>`;
+    }
+
+    // ========== UI UTILITIES ========== //
+    function showLoading() {
+      document.getElementById('loading').style.display = 'flex';
+    }
+
+    function hideLoading() {
+      document.getElementById('loading').style.display = 'none';
+    }
+
+    function handleEnter(e) {
+      if (e.key === 'Enter') handleQuery(); // Enter key support
+    }
+
+    function scrollToBottom() {
+      const conversation = document.getElementById('conversation');
+      conversation.scrollTop = conversation.scrollHeight;
+    }
+
+    // ========== EVENT LISTENERS ========== //
+    window.onload = () => {
+      document.getElementById('queryButton').addEventListener('click', handleQuery);
+      document.getElementById('queryInput').addEventListener('keypress', handleEnter);
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+# Environment files
+.env
+.env.*
+secrets/
+
+# Version control
+.git
+.gitignore
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
+
+# Build files
+Dockerfile
+.dockerignore
+*.dockerfile
+
+# Local development files
+*.log
+*.sqlite3
+*.db
+
+# Test files
+tests/
+test/
+coverage.xml
+
+# Documentation
+docs/
+*.md
+
+# Output directories
+outputs/
+temp/

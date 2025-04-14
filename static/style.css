@@ -1,0 +1,369 @@
+/* style.css */
+:root {
+  /* Light Theme */
+  --bg-color: #ffffff;
+  --text-color: #2d3436;
+  --primary-color: #007bff;
+  --border-color: #dfe6e9;
+  --container-width: 600px;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --error-color: #dc3545;
+}
+
+.dark-mode {
+  /* Dark Blue Theme */
+  --bg-color: #0a192f;
+  --text-color: #cbd5e1;
+  --primary-color: #4da3ff;
+  --border-color: #2c3a58;
+  --card-bg: #172a45;
+  --input-bg: #1a365d;
+  --error-color: #ff6b6b;
+}
+
+/* Base Styles */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background-color 0.3s ease;
+}
+
+/* Login Page Styles */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+.login-box * {
+  box-sizing: border-box;
+}
+
+.login-box {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border-color);
+}
+
+.login-box h1 {
+  text-align: center;
+  margin: 0 0 2rem 0;
+  font-size: 2rem;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.login-box input {
+  width: calc(100% - 4px); /* Account for border */
+  padding: 12px 20px;
+  margin: 0;
+  border: 2px solid var(--border-color);
+}
+
+
+.login-box button {
+  padding: 12px 20px;
+  margin-top: 8px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .login-box h1 {
+    font-size: 1.75rem;
+  }
+  
+  .login-box input,
+  .login-box button {
+    padding: 10px 16px;
+  }
+}
+
+
+
+
+
+.alert.error {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--error-color);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  margin-bottom: 1.5rem;
+}
+
+/* App Interface Styles */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Existing styles remain unchanged below this line */
+.chat-container {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-area {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 2rem 0;
+  color: var(--primary-color);
+  letter-spacing: -0.5px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 14px 24px;
+  border: 2px solid var(--border-color);
+  border-radius: 30px;
+  font-size: 16px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(77, 163, 255, 0.2);
+}
+
+button {
+  padding: 14px 28px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.conversation {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px 0;
+  margin: 0 -12px;
+}
+
+.agent-msg, .user-msg {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 18px 24px;
+  margin: 12px;
+  max-width: 80%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.user-msg {
+  background: linear-gradient(135deg, var(--primary-color), #0066cc);
+  color: white;
+  margin-left: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.agent-msg {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.header small {
+  opacity: 0.8;
+  font-size: 0.85rem;
+}
+
+.sources {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  overflow: hidden; /* Contain nested elements */
+}
+
+.sources ul {
+  padding-left: 20px;
+  margin: 0;
+  list-style-type: square;
+  max-width: 100%; /* Prevent list overflow */
+}
+
+.sources li {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  word-break: break-word; /* Break long words */
+  overflow-wrap: anywhere; /* Modern alternative to word-break */
+  white-space: normal; /* Override any inherited nowrap */
+  margin-right: 15px; /* Add breathing room */
+}
+
+/* Add these to handle parent containers */
+.agent-msg {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  max-width: 100%; /* Ensure message container doesn't overflow */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Optional: Add scroll for very long source lists */
+.sources {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.welcome-msg {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.welcome-msg h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.welcome-msg p {
+  color: var(--text-color);
+  opacity: 0.8;
+  font-size: 1.1rem;
+}
+
+/* Loading Animation */
+.loading-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.loading-container img {
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,0.1));
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: white !important;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.download-link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.theme-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: 2px solid var(--text-color);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-btn:hover {
+  transform: rotate(180deg);
+  border-color: var(--primary-color);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}

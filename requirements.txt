@@ -1,0 +1,13 @@
+flask
+flask-httpauth
+flask_restful
+python-dotenv
+markdown
+pyjwt
+werkzeug
+langchain-openai
+langchain-core
+langchain
+langchain-community
+duckduckgo-search
+wikipedia 
