@@ -162,42 +162,23 @@ docker run -p 5000:5000 --rm \
 
 1. Navigate to `http://localhost:5000/login` to log in
 <div class="image-slider">
-  <img src="images/1.png" alt="Login Page" class="slide-animation" style="width: 30%;">
+  <img src="images/1.png" alt="Login Page" class="slide-animation" style="width: 40%;">
 </div>
 
 2. Upon successful authentication, you'll be redirected to the research dashboard (`/app`)
 <div class="image-pair">
-  <img src="images/2a.png" alt="Night Mode" style="animation: slideLeft 1s ease-out;">
-  <img src="images/2b.png" alt="Day Mode" style="animation: slideRight 1s ease-out;">
+  <img src="images/2a.png" alt="Night Mode" style="animation: slideLeft 1s ease-out; style="width: 40%;">
+  <img src="images/2b.png" alt="Day Mode" style="animation: slideRight 1s ease-out;style="width: 40%;">
 </div>
-
-<style>
-  @keyframes slideLeft {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-  }
-  
-  @keyframes slideRight {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-  }
-</style>
 
 3. From the dashboard, you can:
    - Perform web searches
    - Query Wikipedia
    - Save research findings
 <div class="image-pair">
-  <img src="images/3a.png" alt="Day Query" style="animation: float 4s ease-in-out infinite;">
-  <img src="images/3b.png" alt="Night Query" style="animation: float 4s ease-in-out infinite 2s;">
+  <img src="images/3a.png" alt="Day Query" style="animation: float 4s ease-in-out infinite; style="width: 40%;">
+  <img src="images/3b.png" alt="Night Query" style="animation: float 4s ease-in-out infinite 2s; style="width: 40%;">
 </div>
-
-<style>
-  @keyframes float {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(15px); }
-  }
-</style>
 
 ## Authentication System
 
