@@ -153,14 +153,14 @@ docker run -p 5000:5000 --rm \
 </style>
 
 1. Navigate to `http://localhost:5000/login` to log in
-<div class="image-slider">
-  <img src="images/1.png" alt="Login Page" class="slide-animation" style="width: 40%;">
+<div style="display: flex; padding: 10px; margin: 40px 10px; justify-content: center;">
+  <img src="images/1.png" alt="Login Page" style="width: 30%; height: auto; object-fit: contain;">
 </div>
 
 2. Upon successful authentication, you'll be redirected to the research dashboard (`/app`)
-<div class="image-pair">
-  <img src="images/2a.png" alt="Night Mode" style="animation: slideLeft 1s ease-out; width: 40%; height: 80%">
-  <img src="images/2b.png" alt="Day Mode" style="animation: slideRight 1s ease-out;width: 40%; height: 80%">
+<div style="display: flex; gap: 20px; padding: 10px; margin: 40px 10px; justify-content: space-between;">
+  <img src="images/2a.png" alt="Login Page night mode" style="width: 45%; height: auto; border-radius: 8px;">
+  <img src="images/2b.png" alt="Login Page day mode" style="width: 45%; height: auto; border-radius: 8px;">
 </div>
 
 3. From the dashboard, you can:
