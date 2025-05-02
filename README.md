@@ -120,37 +120,6 @@ docker run -p 5000:5000 --rm \
   research-bot
   ```
 ### Accessing the Research Portal
-<style>
-  .image-slider {
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .slide-animation {
-    animation: slideHorizontal 12s infinite ease-in-out;
-    transition: transform 0.8s ease;
-  }
-  
-
-  .image-pair {
-    display: flex;
-    gap: 20px;
-    padding: 10px;
-    margin: 40px 10px;
-  }
-  
-  .image-pair img {
-    width: 45%;
-    height: auto;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-  }
-  
-  .image-pair img:hover {
-    transform: translateX(10px);
-    z-index: 2;
-  }
-</style>
 
 1. Navigate to `http://localhost:5000/login` to log in
 <div style="display: flex; padding: 10px; margin: 40px 10px; justify-content: center;">
