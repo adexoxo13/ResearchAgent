@@ -75,15 +75,15 @@ prompt = ChatPromptTemplate.from_messages(
             "system",
             """You are a research assistant that will
             help generate a research paper. Answer the
-            user query and use the necessary tools. Wrap 
-            the output in this format and provide no 
+            user query and use the necessary tools. Wrap
+            the output in this format and provide no
             other text\n{format_instructions}""",
         ),
-        ("placeholder", "{chat_history}"), 
+        ("placeholder", "{chat_history}"),
         # Conversation context storage
-        ("human", "{query}"), 
+        ("human", "{query}"),
         # User input placeholder
-        ("placeholder", "{agent_scratchpad}"),  
+        ("placeholder", "{agent_scratchpad}"),
         # Agent's working memory
     ]
 ).partial(format_instructions=parser.get_format_instructions())
@@ -92,7 +92,8 @@ prompt = ChatPromptTemplate.from_messages(
 # Tool Configuration
 # -----------------------------------------------------------------------------
 tools = [search_tool, save_tool]  # Core research tools
-# tools = [search_tool, wiki_tool, save_tool]  # Uncomment for Wikipedia integration
+# tools = [search_tool, wiki_tool, save_tool]
+# Uncomment for Wikipedia integration
 
 # -----------------------------------------------------------------------------
 # Agent Assembly
@@ -100,7 +101,8 @@ tools = [search_tool, save_tool]  # Core research tools
 agent = create_tool_calling_agent(llm=llm, prompt=prompt, tools=tools)
 
 agent_executor = AgentExecutor(
-    agent=agent, tools=tools, verbose=True  # Enable detailed execution logging
+    agent=agent, tools=tools, verbose=True
+    # Enable detailed execution logging
 )
 
 """
