@@ -1,4 +1,6 @@
+import sys
 import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tools import save_to_txt
 
 def test_save_to_txt_creates_file(tmp_path):
