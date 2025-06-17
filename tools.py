@@ -1,8 +1,9 @@
 """
 AI Research Agent - Core Tools Module
 
-This module implements essential research capabilities for an AI assistant system,
-integrating web search, Wikipedia access, and persistent storage functionality.
+This module implements essential research capabilities for an AI assistant
+system, integrating web search, Wikipedia access, and persistent storage 
+functionality.
 """
 
 # Import LangChain components for knowledge retrieval and tool integration
@@ -85,7 +86,7 @@ Tool Configuration Summary:
 
 Usage Flow:
 1. Agent uses search_tool for initial investigation
-2. Verifies facts with wiki_tool 
+2. Verifies facts with wiki_tool
 3. Saves validated findings with save_tool
 4. Process repeats for iterative research
 """
