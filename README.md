@@ -1,5 +1,5 @@
 # ResearchAgent
-[![CI](https://github.com/adexoxo13/ResearchAgent/actions/workflows/ci.yml/badge.svg?branch=main&event=workflow_run)](https://github.com/adexoxo13/ResearchAgent/actions/workflows/ci.yml)
+[![CI](https://github.com/adexoxo13/ResearchAgent/actions/workflows/ci.yml/badge.svg)](https://github.com/adexoxo13/ResearchAgent/actions/workflows/ci.yml)
 ## Overview
 ResearchAgent is a powerful AI-driven research assistant that integrates various tools for intelligent web search, Wikipedia querying, and persistent storage. This agent is designed to help users quickly gather, validate, and store research data in a structured format. The system leverages advanced models and external APIs to perform real-time searches, access verified information from Wikipedia, and save findings into a local file system.
 
