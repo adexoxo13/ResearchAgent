@@ -9,34 +9,58 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      BASIC_AUTH_USERNAME: ${{ secrets.BASIC_AUTH_USERNAME }}
+      BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
       - name: Build Docker image
-        run: |
-          docker build -t research-bot .
+        run: docker build -t research-bot .
+
       - name: Run ResearchAgent (in background)
         run: |
           docker run -d -p 5000:5000 --name research-bot \
-            -e OPENAI_API_KEY=dummy \
-            -e BASIC_AUTH_USERNAME=admin \
-            -e BASIC_AUTH_PASSWORD=admin \
-            -e SECRET_KEY=testkey \
+            -e OPENAI_API_KEY="${OPENAI_API_KEY}" \
+            -e BASIC_AUTH_USERNAME="${BASIC_AUTH_USERNAME}" \
+            -e BASIC_AUTH_PASSWORD="${BASIC_AUTH_PASSWORD}" \
+            -e SECRET_KEY="${SECRET_KEY}" \
             research-bot
-      - name: Wait for service to be healthy
+
+      - name: Wait for the app to be healthy
         run: |
-          sleep 10 # Or use a curl health check to wait for API to be ready
+          for i in {1..30}; do
+            if curl --fail http://localhost:5000/; then
+              echo "App is up!"
+              break
+            fi
+            echo "Waiting for app..."
+            sleep 2
+          done
+
       - name: Perform a research action (trigger file creation)
         run: |
-          curl -X POST http://localhost:5000/api/research -H "Content-Type: application/json" -d '{"query": "test research"}'
+          curl -X POST http://localhost:5000/api/research \
+            -H "Content-Type: application/json" \
+            -d '{"query": "test research"}'
+
       - name: Run tests
         run: |
           pip install pytest
           pytest
+
+      - name: Stop Docker container
+        if: always()
+        run: docker stop research-bot || true
