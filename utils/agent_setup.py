@@ -73,13 +73,18 @@ prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            """You are a research assistant that will help generate a research paper.
-            Answer the user query and use necessary tools.
-            Wrap the output in this format and provide no other text\n{format_instructions}""",
+            """You are a research assistant that will
+            help generate a research paper. Answer the
+            user query and use the necessary tools. Wrap 
+            the output in this format and provide no 
+            other text\n{format_instructions}""",
         ),
-        ("placeholder", "{chat_history}"),  # Conversation context storage
-        ("human", "{query}"),  # User input placeholder
-        ("placeholder", "{agent_scratchpad}"),  # Agent's working memory
+        ("placeholder", "{chat_history}"), 
+        # Conversation context storage
+        ("human", "{query}"), 
+        # User input placeholder
+        ("placeholder", "{agent_scratchpad}"),  
+        # Agent's working memory
     ]
 ).partial(format_instructions=parser.get_format_instructions())
 
