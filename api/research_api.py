@@ -72,11 +72,16 @@ class Research(Resource):
 
             # Construct API response
             return {
-                "topic": structured_response.topic,  # Research topic title
-                "summary": html_summary,  # HTML-formatted content
-                "sources": structured_response.sources,  # Reference URLs
-                "tools": structured_response.tools_used,  # AI tools utilized
-                "download_link": f"/download/{filename}",  # File access endpoint
+                "topic": structured_response.topic, 
+                # Research topic title
+                "summary": html_summary,  
+                # HTML-formatted content
+                "sources": structured_response.sources, 
+                # Reference URLs
+                "tools": structured_response.tools_used,  
+                # AI tools utilized
+                "download_link": f"/download/{filename}",  
+                # File access endpoint
                 "processing_time": round(
                     time.time() - start_time, 2
                 ),  # Duration in seconds
@@ -87,7 +92,8 @@ class Research(Resource):
             print("Error in /research:", e)  # Server-side logging
             return {
                 "error": str(e),  # Developer-facing message
-                "details": "Check server logs for more information",  # User guidance
+                "details": "Check server logs for more information",  
+                # User guidance
             }, 500  # HTTP 500 Internal Server Error
 
 
@@ -109,7 +115,8 @@ class Download(Resource):
         - Enable authentication in production
         """
         # Configure secure download path
-        downloads_folder = os.path.join(os.getcwd(), "outputs")  # Isolate files
+        downloads_folder = os.path.join(os.getcwd(), "outputs") 
+        # Isolate files
 
         # Safe file serving with Flask's send_from_directory
         return send_from_directory(
@@ -122,7 +129,7 @@ class Download(Resource):
 """
 API Security Notes:
 1. Authentication: Currently disabled (enable method_decorators for JWT)
-2. Input Validation: 
+2. Input Validation:
    - Research endpoint validates query exists
    - Download endpoint needs filename sanitization
 3. File Security:
